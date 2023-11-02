@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_crypto/views/subviews/home_list_item.dart';
+import 'package:go_crypto/res/colors.dart';
+import 'package:go_crypto/res/routes.dart';
+import 'package:go_crypto/views/item_details.dart';
+import 'package:go_crypto/views/news_view.dart';
+import 'package:go_crypto/views/subviews/crypto_list_item.dart';
+import 'package:go_crypto/views/subviews/news_item_view.dart';
+import 'package:go_crypto/views/welcome_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +20,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Go Crypto',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          scaffoldBackgroundColor: Colors.black,
+          useMaterial3: true),
+      routes: {
+        itemDetailsRoute: (context) => const ItemDetailsView(),
+      },
+      home:  NewsView(),
     );
   }
 }
@@ -32,43 +41,42 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
+          backgroundColor: Colors.black,
+          leading: const BackButton(color: Colors.white)),
       body: Container(
         width: double.maxFinite,
         height: double.maxFinite,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.black,
-              Color(0xff38253c),
-            ],
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (BuildContext context, int index) {
-                return const CryptoListItem();
-              }),
+        decoration: backgroundStyle,
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: WelcomeView(),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 9,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, itemDetailsRoute);
+                          },
+                          child: const CryptoListItem());
+                    }),
+              ),
+            ),
+          ],
         ),
       ),
-      backgroundColor: const Color(0x00000000),
+      backgroundColor: Colors.black,
     );
   }
 }
