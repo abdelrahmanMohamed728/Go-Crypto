@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       routes: {
         itemDetailsRoute: (context) => const ItemDetailsView(),
       },
-      home:  NewsView(),
+      home: NewsView(),
     );
   }
 }

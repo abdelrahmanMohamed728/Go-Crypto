@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-
-import '../../res/colors.dart';
+import 'package:go_crypto/data/model/news.dart';
 import '../../res/fonts.dart';
+import '../../utils/date_utils.dart';
 
 class NewsItemView extends StatefulWidget {
-  const NewsItemView({super.key});
+  final News newsItem;
+
+  const NewsItemView(this.newsItem, {super.key});
 
   @override
   State<NewsItemView> createState() => _NewsItemViewState();
@@ -29,17 +31,17 @@ class _NewsItemViewState extends State<NewsItemView> {
                     width: 4.0,
                   ),
                 ),
-                child: const CircleAvatar(
+                child: CircleAvatar(
                     radius: 30.0,
                     backgroundImage:
-                        AssetImage("assets/images/profile_placeholder.jpg")),
+                        NetworkImage(widget.newsItem.sourceInfo?.img ?? "")),
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 8.0),
+               Padding(
+                padding: const EdgeInsets.only(left: 8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Michael Stone',
                       style: TextStyle(
                           color: Colors.white,
@@ -47,8 +49,9 @@ class _NewsItemViewState extends State<NewsItemView> {
                           fontSize: 24.0),
                     ),
                     Text(
-                      '2m ago',
-                      style: TextStyle(
+                      GoDateUtils().fromTimestampToDate(
+                          widget.newsItem.publishedOn ?? 0),
+                      style: const TextStyle(
                           color: Colors.white,
                           fontFamily: mainFont,
                           fontSize: 14.0),
@@ -58,22 +61,25 @@ class _NewsItemViewState extends State<NewsItemView> {
               ),
             ],
           ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(8.0,20.0,8.0,0),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 0),
             child: Text(
-              'Over the last 24 hours, approximately \$612.3 million worth of Bitcoin flowed into exchanges while \$1.5 billion was withdrawn, resulting in a net outflow of \$936.5 million. This massive movement of Bitcoin off exchanges reduces the circulating supply available for trading.',
-              style: TextStyle(
+              widget.newsItem.body ?? "",
+              overflow: TextOverflow.ellipsis,
+              maxLines: 5,
+              style: const TextStyle(
                 color: Colors.white,
-                fontSize: 14
+                fontSize: 14,
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(8.0,32.0,8.0,0),
+            padding: const EdgeInsets.fromLTRB(8.0, 32.0, 8.0, 0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
-              child: Image.asset(
-                'assets/images/news_placeholder.png',
+              child: Image.network(
+                widget.newsItem.imageurl ?? "",
+                fit: BoxFit.contain,
               ),
             ),
           )
