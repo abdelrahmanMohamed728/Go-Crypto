@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_crypto/bloc/NewsBloc.dart';
 import 'package:go_crypto/bloc/events/news_event.dart';
 import 'package:go_crypto/data/model/base_news_response.dart';
 import 'package:go_crypto/views/subviews/news_item_view.dart';
+import '../bloc/news_bloc.dart';
 import '../bloc/state/go_state.dart';
 import '../res/fonts.dart';
 
@@ -47,7 +47,7 @@ class _NewsViewState extends State<NewsView> {
             );
           } else if (state is GoError) {
             return Text(state.message != null ? state.message! : "");
-          } else if(state is GoLoaded){
+          } else if (state is GoLoaded) {
             final newsList = (state.goModel as BaseNewsResponse).news;
             return ListView.separated(
               shrinkWrap: true,
@@ -59,8 +59,7 @@ class _NewsViewState extends State<NewsView> {
                 return const Divider();
               },
             );
-          }
-          else {
+          } else {
             return const Text("Starting");
           }
         }),

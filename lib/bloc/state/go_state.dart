@@ -1,7 +1,4 @@
-
-
 import 'package:equatable/equatable.dart';
-
 import '../../data/model/go_model.dart';
 
 abstract class GoState extends Equatable {
