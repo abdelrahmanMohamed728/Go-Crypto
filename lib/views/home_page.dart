@@ -35,18 +35,17 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.black,
         leading: const BackButton(color: Colors.white),
       ),
-      body: Container(
-        width: double.maxFinite,
-        height: double.maxFinite,
-        decoration: backgroundStyle,
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: WelcomeView(),
-            ),
-            Expanded(
-              child: Padding(
+      body: SingleChildScrollView(
+        child: Container(
+          width: double.maxFinite,
+          decoration: backgroundStyle,
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: WelcomeView(),
+              ),
+              Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: BlocProvider(
                   create: (_) => _coinsBloc,
@@ -67,6 +66,7 @@ class _HomePageState extends State<HomePage> {
                       final coinsList = (state.goModel as CoinsResponse).data;
                       return ListView.builder(
                         shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: coinsList?.length ?? 0,
                         itemBuilder: (BuildContext context, int index) {
                           return GestureDetector(
@@ -82,8 +82,8 @@ class _HomePageState extends State<HomePage> {
                   }),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

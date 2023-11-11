@@ -8,10 +8,10 @@ class WelcomeView extends StatelessWidget {
     return Column(
       children: [
         Image.asset(
-          'assets/images/cryptocurrency.png',
+          'assets/images/go_crypto_removebg.png',
           fit: BoxFit.fill,
           width: 350,
-          height: 280,
+          height: 350,
         ),
         const Padding(
           padding: EdgeInsets.only(top: 8.0),
