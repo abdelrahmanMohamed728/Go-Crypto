@@ -28,7 +28,6 @@ class _NewsViewState extends State<NewsView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        leading: const BackButton(color: Colors.white),
         title: const Text(
           'News',
           style: TextStyle(
@@ -42,22 +41,30 @@ class _NewsViewState extends State<NewsView> {
         create: (_) => _newsBloc,
         child: BlocBuilder<NewsBloc, GoState>(builder: (context, state) {
           if (state is GoLoading) {
-            return const CircularProgressIndicator(
-              color: Colors.white,
+            return const Center(
+              child: SizedBox(
+                width: 70, height: 70,
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ),
             );
           } else if (state is GoError) {
             return Text(state.message != null ? state.message! : "");
           } else if (state is GoLoaded) {
             final newsList = (state.goModel as BaseNewsResponse).news;
-            return ListView.separated(
-              shrinkWrap: true,
-              itemCount: newsList?.length ?? 0,
-              itemBuilder: (BuildContext context, int index) {
-                return NewsItemView(newsList![index]);
-              },
-              separatorBuilder: (context, index) {
-                return const Divider();
-              },
+            return Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: ListView.separated(
+                shrinkWrap: true,
+                itemCount: newsList?.length ?? 0,
+                itemBuilder: (BuildContext context, int index) {
+                  return NewsItemView(newsList![index]);
+                },
+                separatorBuilder: (context, index) {
+                  return const Divider();
+                },
+              ),
             );
           } else {
             return const Text("Starting");

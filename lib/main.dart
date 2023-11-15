@@ -4,6 +4,7 @@ import 'package:go_crypto/res/routes.dart';
 import 'package:go_crypto/views/home_page.dart';
 import 'package:go_crypto/views/item_details.dart';
 import 'package:go_crypto/views/news_view.dart';
+import 'package:go_crypto/views/splash_screen.dart';
 import 'package:go_crypto/views/subviews/crypto_list_item.dart';
 import 'package:go_crypto/views/welcome_view.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       routes: {
         itemDetailsRoute: (context) => const ItemDetailsView(),
       },
-      home: const HomePage(),
+      home: const SplashScreen(),
     );
   }
 }
