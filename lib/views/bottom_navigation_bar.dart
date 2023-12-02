@@ -19,15 +19,15 @@ class _BottomNavigationBarViewState extends State<BottomNavigationBarView> {
       currentIndex: widget.index,
       backgroundColor: Colors.white10,
       unselectedIconTheme: const IconThemeData(
+        color: Colors.grey,
+        size: 30,
+      ),
+      unselectedItemColor: Colors.grey,
+      selectedIconTheme: const IconThemeData(
         color: Color(0xff3b134d),
         size: 30,
       ),
-      unselectedItemColor: const Color(0xff3b134d),
-      selectedIconTheme: const IconThemeData(
-        color: Colors.white,
-        size: 30,
-      ),
-      selectedItemColor: Colors.white,
+      selectedItemColor: const Color(0xff3b134d),
       selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
       elevation: 0,
       items: const <BottomNavigationBarItem>[
