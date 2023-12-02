@@ -59,7 +59,7 @@ class _NewsViewState extends State<NewsView> {
                 shrinkWrap: true,
                 itemCount: newsList?.length ?? 0,
                 itemBuilder: (BuildContext context, int index) {
-                  return NewsItemView(newsList![index]);
+                  return NewsListItem(newsList![index]);
                 },
                 separatorBuilder: (context, index) {
                   return const Divider();

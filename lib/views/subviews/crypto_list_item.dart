@@ -25,12 +25,16 @@ class _CryptoListItemState extends State<CryptoListItem> {
         ),
         child: Row(
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
-              child: SizedBox(
-                width: 45,height: 45,
-                child: Image.network(
-                    imagesBaseUrl + (widget.coinsData.coinInfo?.imageUrl ?? "")),
+            Hero(
+              tag: widget.coinsData.coinInfo?.imageUrl?? "",
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 8.0),
+                child: SizedBox(
+                  width: 45,
+                  height: 45,
+                  child: Image.network(imagesBaseUrl +
+                      (widget.coinsData.coinInfo?.imageUrl ?? "")),
+                ),
               ),
             ),
             Column(

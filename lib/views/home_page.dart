@@ -34,10 +34,19 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.black,
       ),
-      bottomNavigationBar: BottomNavigationBarView((index) {
-        _index = index;
-        setState(() {});
-      }, _index),
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topRight: Radius.circular(24),
+            topLeft: Radius.circular(24),
+          ),
+          child: BottomNavigationBarView((index) {
+            _index = index;
+            setState(() {});
+          }, _index),
+        ),
+      ),
       body: IndexedStack(
         index: _index,
         children: _pages,

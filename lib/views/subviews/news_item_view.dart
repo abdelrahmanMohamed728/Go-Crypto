@@ -3,16 +3,15 @@ import 'package:go_crypto/data/model/news.dart';
 import '../../res/fonts.dart';
 import '../../utils/date_utils.dart';
 
-class NewsItemView extends StatefulWidget {
+class NewsListItem extends StatefulWidget {
   final News newsItem;
-
-  const NewsItemView(this.newsItem, {super.key});
+  const NewsListItem(this.newsItem, {super.key});
 
   @override
-  State<NewsItemView> createState() => _NewsItemViewState();
+  State<NewsListItem> createState() => _NewsListItemState();
 }
 
-class _NewsItemViewState extends State<NewsItemView> {
+class _NewsListItemState extends State<NewsListItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(

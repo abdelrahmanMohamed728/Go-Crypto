@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:go_crypto/bloc/events/news_event.dart';
 import 'package:go_crypto/bloc/state/go_state.dart';
-
 import '../data/repo/news_repo.dart';
 import 'events/go_event.dart';
 

@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:go_crypto/data/model/coins_data.dart';
+import 'package:go_crypto/res/constants.dart';
 import 'package:go_crypto/views/subviews/chart_view.dart';
 import '../res/colors.dart';
 import '../res/fonts.dart';
 
-class ItemDetailsView extends StatefulWidget {
-  const ItemDetailsView({super.key});
+class CoinDetailsView extends StatefulWidget {
+  const CoinDetailsView({super.key});
 
   @override
-  State<ItemDetailsView> createState() => _ItemDetailsViewState();
+  State<CoinDetailsView> createState() => _CoinDetailsViewState();
 }
 
-class _ItemDetailsViewState extends State<ItemDetailsView> {
+class _CoinDetailsViewState extends State<CoinDetailsView> {
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
+    final item = arguments[coinData] as CoinsData;
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.black,
@@ -26,27 +31,35 @@ class _ItemDetailsViewState extends State<ItemDetailsView> {
             children: [
               Row(
                 children: [
-                  const Column(
+                  Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('BTC',
-                            style: TextStyle(
+                        Text(item.coinInfo?.name ?? "",
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontFamily: mainFont,
                                 fontSize: 16.0)),
-                        Text('Bitcoin',
-                            style: TextStyle(
+                        Text(item.coinInfo?.fullName ?? "",
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontFamily: mainFont,
                                 fontSize: 28.0)),
-                        Text('\$34000',
-                            style: TextStyle(
+                        Text(item.display?.uSD?.price ?? '0',
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontFamily: mainFont,
                                 fontSize: 28.0)),
                       ]),
                   const Spacer(),
-                  Image.asset('assets/images/btc.png')
+                  Hero(
+                    tag: item.coinInfo?.imageUrl ?? "",
+                    child: SizedBox(
+                      width: 45,
+                      height: 45,
+                      child: Image.network(
+                          imagesBaseUrl + (item.coinInfo?.imageUrl ?? "")),
+                    ),
+                  ),
                 ],
               ),
               Padding(
